@@ -43,6 +43,7 @@ jasc.on(
 						iRange = (i_max - i_min) / 4;
 						i_min = i - iRange;
 						i_max = i + iRange;
+						num_i += 150;
 						break;
 					case "Minus":
 						// -
@@ -54,6 +55,7 @@ jasc.on(
 						iRange = i_max - i_min;
 						i_min = i - iRange;
 						i_max = i + iRange;
+						num_i -= 150;
 						break;
 					case "ArrowUp":
 						i = (i_max - i_min) / 10;
@@ -83,10 +85,18 @@ jasc.on(
 						num_i = _num_i;
 						color_map = _color_map;
 						break;
+					case "Digit1":
+						color_map = 0;
+						break;
+					case "Digit2":
+						color_map = 1;
+						break;
+					case "Digit3":
+						color_map = 2;
+						break;
 					default:
 						continue;
 				}
-
 				mandelbrot.draw(r_min, r_max, i_min, i_max, num_i, color_map);
 				break;
 			}
@@ -94,6 +104,28 @@ jasc.on(
 	},
 	null,
 	{ runAnimationFrame: true }
+);
+
+document.addEventListener(
+	"touchmove",
+	function (event) {
+		if (event.scale !== 1) {
+			event.preventDefault();
+		}
+	},
+	{ passive: false }
+);
+
+document.addEventListener(
+	"wheel",
+	(evt) => {
+		const isPinch = !!(evt.deltaY % 1);
+
+		if (isPinch) evt.preventDefault();
+	},
+	{
+		passive: false,
+	}
 );
 
 class Mandelbrot {
@@ -162,6 +194,7 @@ class Mandelbrot {
 	}
 
 	draw(r_min, r_max, i_min, i_max, num_i, color_map) {
+		if (num_i < 100) num_i = 100;
 		this._cache = [r_min, r_max, i_min, i_max, num_i, color_map];
 		const gl = this.glw.gl;
 		gl.viewport(0, 0, this.width, this.height);

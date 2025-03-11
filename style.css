@@ -5,6 +5,10 @@ html, body {
 	width: 100%;
 }
 
+html, css {
+	touch-action: none;
+}
+
 body {
 	overflow: hidden;
 }
