@@ -43,7 +43,7 @@ jasc.on(
 						iRange = (i_max - i_min) / 4;
 						i_min = i - iRange;
 						i_max = i + iRange;
-						num_i += 150;
+						num_i += 200;
 						break;
 					case "Minus":
 						// -
@@ -55,7 +55,7 @@ jasc.on(
 						iRange = i_max - i_min;
 						i_min = i - iRange;
 						i_max = i + iRange;
-						num_i -= 150;
+						num_i -= 200;
 						break;
 					case "ArrowUp":
 						i = (i_max - i_min) / 10;
